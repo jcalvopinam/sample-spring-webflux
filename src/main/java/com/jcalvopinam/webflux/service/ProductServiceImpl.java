@@ -22,48 +22,53 @@
  * SOFTWARE.
  */
 
-package com.jcalvopinam.webflux;
+package com.jcalvopinam.webflux.service;
 
 import com.jcalvopinam.webflux.model.Product;
 import com.jcalvopinam.webflux.repository.ProductRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.FieldError;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.time.LocalDate;
 
 /**
  * @author juan.calvopina
  */
-@SpringBootApplication
-@Slf4j
-public class SampleSpringWebfluxApplication implements CommandLineRunner {
+@Service
+public class ProductServiceImpl implements ProductService {
 
-    private final ReactiveMongoTemplate reactiveMongoTemplate;
     private final ProductRepository productRepository;
 
-    public SampleSpringWebfluxApplication(final ReactiveMongoTemplate reactiveMongoTemplate,
-                                          final ProductRepository productRepository) {
-        this.reactiveMongoTemplate = reactiveMongoTemplate;
+    public ProductServiceImpl(final ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(SampleSpringWebfluxApplication.class, args);
+    @Override
+    public Flux<Product> findAll() {
+        return productRepository.findAll();
     }
 
     @Override
-    public void run(final String... args) throws Exception {
-        reactiveMongoTemplate.dropCollection("product")
-                             .subscribe();
+    public Mono<Product> findById(final String id) {
+        return productRepository.findById(id);
+    }
 
-        Flux.just(new Product("MacBook Air", 999.00),
-                  new Product("MacBook Pro", 1299.00),
-                  new Product("iMac", 1499.00),
-                  new Product("iMac Pro", 4999.00))
-            .flatMap(productRepository::save)
-            .subscribe(product -> log.info("Insert: {} {}", product.getId(), product.getName()));
+    @Override
+    public Mono<Product> save(final Product product) {
+        product.setDate(LocalDate.now());
+        return productRepository.save(product);
+    }
+
+    @Override
+    public Mono<Void> delete(final Product product) {
+        return productRepository.delete(product);
+    }
+
+    @Override
+    public String getFieldErrorMessage(final FieldError fieldError) {
+        return "The field '" + fieldError.getField() + "' " + fieldError.getDefaultMessage();
     }
 
 }

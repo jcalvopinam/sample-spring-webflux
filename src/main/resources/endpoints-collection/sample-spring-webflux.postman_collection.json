@@ -1,0 +1,139 @@
+{
+  "info": {
+    "_postman_id": "68668cb5-52a5-4187-95f8-f7866e42351c",
+    "name": "sample-spring-webflux",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "findAll",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/v1/products",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "findById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/v1/products/6010bf95b0a7af5fd0f52356",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "products",
+            "6010bf95b0a7af5fd0f52356"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createProduct",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Dell\",\n    \"price\": 800.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/api/v1/products",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "updateProduct",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Dell\",\n    \"price\": 850.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/api/v1/products/601082bc3d6dcb2ceeb334a2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "products",
+            "601082bc3d6dcb2ceeb334a2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteProduct",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Dell\",\n    \"price\": 850.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/api/v1/products/601082bc3d6dcb2ceeb334a2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "products",
+            "601082bc3d6dcb2ceeb334a2"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
